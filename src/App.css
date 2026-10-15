@@ -5,7 +5,10 @@
 .app {
   padding: 40px;
   text-align: center;
+  box-sizing: border-box;
 }
+
+/* Navigation */
 
 nav {
   margin-bottom: 30px;
@@ -19,42 +22,43 @@ nav a {
 
 h1 {
   color: #222;
+  font-size: 36px;
 }
 
-.register-form {
+/* Registration and Login Forms */
+
+.register-form,
+.login-form {
   max-width: 360px;
   margin: 0 auto;
   text-align: left;
 }
 
-.register-form label {
+.register-form label,
+.login-form label {
   display: block;
   margin-top: 12px;
 }
 
-.register-form input {
+.register-form input,
+.login-form input {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
   box-sizing: border-box;
-}
-
-.register-form button {
-  margin-top: 16px;
-  padding: 10px 16px;
-  cursor: pointer;
-}
-
-.register-form input {
   background-color: white;
   color: #222;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.register-form button {
+.register-form button,
+.login-form button {
+  margin-top: 16px;
+  padding: 10px 16px;
   background-color: #2563eb;
   color: white;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
 }
