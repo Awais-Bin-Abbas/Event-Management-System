@@ -181,4 +181,13 @@
     right: 0;
     border-right-color: var(--border);
   }
+  .app {
+    padding: 40px;
+    text-align: center;
+  } 
+  
+
+
+
+
 }
