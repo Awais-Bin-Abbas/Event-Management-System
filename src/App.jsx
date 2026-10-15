@@ -1,11 +1,23 @@
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Events from "./pages/Events";
+
+import "./App.css";
 
 function App() {
   return (
-    <div className="app">
-      <h1>Event Management System</h1>
-      <p>Explore events and manage your registrations.</p>
-    </div>
+    <BrowserRouter>
+      <div className="app">
+        <Navbar />
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/events" element={<Events />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

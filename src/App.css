@@ -184,8 +184,19 @@
   .app {
     padding: 40px;
     text-align: center;
-  } 
-  
+  }
+
+  /* works for the nav and nav a for all the nav anchor elements */
+  nav {
+    margin-bottom: 30px;
+  }
+
+  nav a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
 
 
 
