@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../redux/authSlice";
 
 function Register() {
   const [name, setName] = useState("");
@@ -6,9 +8,41 @@ function Register() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
+  const users = useSelector((state) => state.auth.users);
+  const dispatch = useDispatch();
+
   function handleSubmit(event) {
     event.preventDefault();
-    setMessage("Form is valid! Account saving will be added next.");
+
+    const userEmail = email.trim().toLowerCase();
+
+    const alreadyRegistered = users.some(
+      (user) => user.email === userEmail
+    );
+
+    if (alreadyRegistered) {
+      setMessage("An account with this email already exists.");
+      return;
+    }
+
+    const newUser = {
+      name: name.trim(),
+      email: userEmail,
+      password: password,
+    };
+
+    localStorage.setItem(
+      "users",
+      JSON.stringify([...users, newUser])
+    );
+
+    dispatch(registerUser(newUser));
+
+    setMessage("Account created successfully! You can now log in.");
+
+    setName("");
+    setEmail("");
+    setPassword("");
   }
 
   return (

@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/authSlice";
 
 function Navbar() {
   const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+
+  function handleLogout() {
+    dispatch(logout());
+    localStorage.removeItem("currentUser");
+  }
 
   return (
     <nav>
@@ -10,7 +17,15 @@ function Navbar() {
       <Link to="/events">Events</Link> |{" "}
       <Link to="/register">Register</Link> |{" "}
       <Link to="/login">Login</Link> |{" "}
-      <span>{user ? user.name : "Guest"}</span>
+
+      {user ? (
+        <>
+          <span>{user.name}</span>{" "}
+          <button onClick={handleLogout}>Logout</button>
+        </>
+      ) : (
+        <span>Guest</span>
+      )}
     </nav>
   );
 }
