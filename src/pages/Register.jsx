@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../redux/authSlice";
@@ -14,10 +15,27 @@ function Register() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    const userEmail = email.trim().toLowerCase();
+    const cleanName = name.trim();
+    const cleanEmail = email.trim().toLowerCase();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!cleanName) {
+      setMessage("Please enter your name.");
+      return;
+    }
+
+    if (!emailPattern.test(cleanEmail)) {
+      setMessage("Please enter a valid email address.");
+      return;
+    }
+
+    if (password.length < 6) {
+      setMessage("Password must be at least 6 characters long.");
+      return;
+    }
 
     const alreadyRegistered = users.some(
-      (user) => user.email === userEmail
+      (user) => user.email === cleanEmail
     );
 
     if (alreadyRegistered) {
@@ -26,8 +44,8 @@ function Register() {
     }
 
     const newUser = {
-      name: name.trim(),
-      email: userEmail,
+      name: cleanName,
+      email: cleanEmail,
       password: password,
     };
 
@@ -50,24 +68,27 @@ function Register() {
       <h1>Create Account</h1>
 
       <form className="register-form" onSubmit={handleSubmit}>
-        <label>Name</label>
+        <label htmlFor="name">Name</label>
         <input
+          id="name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
         />
 
-        <label>Email</label>
+        <label htmlFor="email">Email</label>
         <input
+          id="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
 
-        <label>Password</label>
+        <label htmlFor="password">Password</label>
         <input
+          id="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

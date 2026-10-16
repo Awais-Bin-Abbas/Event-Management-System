@@ -93,3 +93,142 @@ nav button {
   height: 160px;
   object-fit: cover;
 }
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 25px 0;
+}
+
+.search-form input {
+  width: 300px;
+  max-width: 65%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-form button {
+  padding: 10px 20px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-form {
+  flex-wrap: wrap;
+}
+
+.category-select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  color: #222;
+}
+
+.event-details {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.event-details img {
+  width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.event-details p {
+  margin: 12px 0;
+}
+
+.event-card a {
+  display: inline-block;
+  margin-top: 12px;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.register-button {
+  padding: 12px 20px;
+  margin-top: 20px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.register-button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.cancel-button {
+  margin-left: 12px;
+  margin-top: 12px;
+  padding: 8px 12px;
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+  .app {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  nav {
+    line-height: 2.5;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 0 4px;
+  }
+
+  .search-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-form input,
+  .search-form select,
+  .search-form button {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .events-list {
+    grid-template-columns: 1fr;
+  }
+
+  .event-card {
+    padding: 12px;
+  }
+
+  .event-details img {
+    height: auto;
+    max-height: 250px;
+  }
+
+  .register-form,
+  .login-form {
+    width: 100%;
+  }
+}

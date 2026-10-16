@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/authSlice";
@@ -13,28 +14,40 @@ function Login() {
   function handleSubmit(event) {
     event.preventDefault();
 
+    const cleanEmail = email.trim().toLowerCase();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(cleanEmail)) {
+      setMessage("Please enter a valid email address.");
+      return;
+    }
+
     const user = users.find(
       (user) =>
-        user.email === email.trim().toLowerCase() &&
+        user.email === cleanEmail &&
         user.password === password
     );
 
-    if (user) {
-      const currentUser = {
-        name: user.name,
-        email: user.email,
-      };
-
-      dispatch(login(currentUser));
-
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
-
-      setMessage("Login successful!");
-      setEmail("");
-      setPassword("");
-    } else {
+    if (!user) {
       setMessage("Invalid email or password.");
+      return;
     }
+
+    const currentUser = {
+      name: user.name,
+      email: user.email,
+    };
+
+    dispatch(login(currentUser));
+
+    localStorage.setItem(
+      "currentUser",
+      JSON.stringify(currentUser)
+    );
+
+    setMessage("Login successful!");
+    setEmail("");
+    setPassword("");
   }
 
   return (
@@ -42,16 +55,18 @@ function Login() {
       <h1>Login</h1>
 
       <form className="login-form" onSubmit={handleSubmit}>
-        <label>Email</label>
+        <label htmlFor="login-email">Email</label>
         <input
+          id="login-email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
 
-        <label>Password</label>
+        <label htmlFor="login-password">Password</label>
         <input
+          id="login-password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
